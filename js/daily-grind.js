@@ -37,10 +37,21 @@ let myDate = new Date();
 let myDay = myDate.getDay();
 
 // Manually change the day for testing
-// myDay = 6;
+// myDay = 0;
 
 let today;
 let coffee;
+
+//use location object to access querystring (address bar)
+const queryString = window.location.search;
+
+//separate query string parameters
+const urlParams = new URLSearchParams(queryString);
+
+if (urlParams.has("day")) {
+  //from querystring
+  myDay = parseInt(urlParams.get("day"));
+}
 
 switch (myDay) {
   case 0:
@@ -151,7 +162,6 @@ document.getElementById("coffee-cup").innerHTML = coffeeTemplate(coffee);
 document.querySelector("html").style.backgroundColor = coffee.color;
 
 const features = document.querySelectorAll(".feature");
-
 features.forEach((feature) => {
   feature.style.color = coffee.color;
 });
